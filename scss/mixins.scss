@@ -1,0 +1,372 @@
+@import "variables";
+@mixin nav-panel($height, $width: 1920px) {
+  $LgH: 40px;
+  $NLMarginR: 20px;
+  $FontS: 25px;
+  $LgMMarinL: 15px;
+  $avatarSize: 50px;
+  $iconsH: 27px;
+  $fontFam: "Qanelas Light", sans-serif;
+
+  @if $width < 601px {
+    $LgH: 20px;
+    $NLMarginR: 10px;
+    $FontS: 15px;
+    $LgMMarinL: 0px;
+    $fontFam: "Qanelas", sans-serif;
+    $avatarSize: 30px;
+    $iconsH: 20px;
+  } @else if $width <= 768px {
+    $LgH: 28px;
+    $NLMarginR: 15px;
+    $FontS: 18px;
+    $avatarSize: 35px;
+    $iconsH: 20px;
+  }
+
+  font-family: $fontFam;
+  height: $height;
+  line-height: $height;
+  #logo {
+    @if ($width < 601px) {
+      margin-left: 15px;
+    }
+    img {
+      line-height: $height;
+      height: $LgH;
+      margin-left: $LgMMarinL;
+    }
+  }
+  .nav-link {
+    text-transform: uppercase;
+    font-size: $FontS;
+    margin-right: $NLMarginR;
+    &:hover {
+      color: $liveCoral;
+    }
+  }
+
+  .nav-element {
+    img { height: $iconsH; }
+    #nav-avatar {
+      width: $avatarSize;
+      height: $avatarSize;
+    }
+  }
+}
+
+@mixin input-main {
+  outline: none;
+  padding: 10px;
+  font-family: "Qanelas Light", sans-serif;
+  background: rgba(246,245,243, 0.4);
+  border: 1px solid rgba(224,230,225, 1);
+  border-radius: 5px;
+  transition: .3s;
+  &:hover { border: $borderGreen; }
+  &:focus {
+    border: $borderGreen;
+    background: none;
+  }
+}
+
+@mixin input--checkbox {
+  input[type='checkbox'] {
+    cursor: pointer;
+    height: 20px;
+    margin: 0px;
+    opacity: 0;
+    position: absolute;
+    width: 20px;
+    z-index: 2;
+
+    &:active{
+      + .checkbox{
+        &:before{
+          height: 50px;
+          width: 50px;
+        }
+      }
+    }
+
+    &:checked{
+      + .checkbox{
+        border: 1px solid $liveCoralRGB;
+
+        &:before{
+          animation: pulse 1s cubic-bezier(0.15, 0.8, 0.5, 1);
+        }
+
+        &:after{
+          height: 20px;
+          opacity: 1;
+          width: 20px;
+        }
+      }
+    }
+  }
+
+  label {
+    margin-left: 10px;
+    cursor: pointer;
+    user-select: none;
+    span {
+      font-size: 18px;
+    }
+  }
+
+  .checkbox {
+    border: 1px solid black;
+    border-radius: 2px;
+    height: 16px;
+    position: relative;
+    transition: all 0.5s;
+    width: 16px;
+
+    &:before, &:after {
+      content: '';
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      transition: all 0.5s;
+    }
+
+    &:before {
+      background-color: rgba(255,255,255,0.9);
+      border-radius: 50%;
+      height: 5px;
+      width: 5px;
+      z-index: -1;
+    }
+
+    &:after {
+      background-color: $liveCoralRGB;
+      border-radius: 2px;
+      height: 5px;
+      opacity: 0;
+      width: 5px;
+    }
+
+    i {
+      color: white;
+      height: 18px;
+      left: 0px;
+      pointer-events: none;
+      position: absolute;
+      top: 0px;
+      width: 18px;
+      z-index: 2;
+    }
+  }
+}
+
+@mixin radio {
+  $radioSize: 18px;
+  $radioBorder: #D1D7E3;
+  $radioActive: $liveCoral;
+
+  cursor: pointer;
+  input {
+    display: none;
+    & ~ i.radio {
+      line-height: $radioSize;
+      height: $radioSize;
+      padding-right: $radioSize;
+      position: relative;
+      &:not(:empty) {
+        padding-left: $radioSize + 8;
+      }
+      &:before,
+      &:after {
+        content: '';
+        width: $radioSize;
+        height: $radioSize;
+        display: block;
+        border-radius: 50%;
+        left: 0;
+        top: 0;
+        position: absolute;
+      }
+      &:before {
+        background: $radioBorder;
+        transition: background .2s ease, transform .4s cubic-bezier(.175, .885, .32, 2);
+      }
+      &:after {
+        background: #fff;
+        transform: scale(.78);
+        transition: transform .6s cubic-bezier(.175, .885, .32, 1.4);
+      }
+    }
+    &:checked + i.radio {
+      &:before {
+        transform: scale(1.04);
+        background: $radioActive;
+      }
+      &:after {
+        transform: scale(.4);
+        transition: transform .3s ease;
+      }
+    }
+  }
+  &:hover {
+    input {
+      & + i.radio {
+        &:before {
+          transform: scale(.92);
+        }
+        &:after {
+          transform: scale(.74);
+        }
+      }
+      &:checked + i.radio {
+        &:after {
+          transform: scale(.4);
+        }
+      }
+    }
+  }
+}
+
+@mixin pulse-btn($color: #42B37C) {
+  .pulse-button {
+    max-width: 300px;
+    border: none;
+    outline: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: $color;
+    box-shadow: 0 3px 2px 0 rgba(0,0,0,0.1);
+    border-radius: 5px;
+    height: 45px;
+    padding: 0 30px;
+    color: #fff;
+    font-family: Lato, Arial, sans-serif;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background .3s, transform .3s, box-shadow .3s;
+    will-change: transform;
+
+    &:hover {
+      //background: darken($color, 5%);
+      box-shadow: 0 4px 17px rgba(0,0,0,0.2);
+      transform: translate3d(0, -2px, 0);
+    }
+    &:active {
+      box-shadow: 0 1px 1px 0 rgba(0,0,0,0.1);
+      transform: translate3d(0, 1px, 0);
+    }
+  }
+
+  .pulse {
+    position: relative;
+
+    &:before, &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255,255,255,.4);
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      opacity: 0;
+      margin: auto;
+    }
+    &:before,
+    &:after {
+      display: none;
+    }
+    &:hover:before { display: block; animation: pulse-btn 1.5s infinite linear; }
+    &:hover:after {  display: block; animation: pulse-btn 2s .4s infinite linear; }
+  }
+}
+
+@keyframes pulse-btn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  33% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
+@mixin require {
+  .required {
+    position: relative;
+    &:after {
+      position: absolute;
+      top: 0;
+      right: -10px;
+      //content: '*';
+      font-size: 20px;
+      font-weight: bold;
+      color: $errorRed;
+    }
+  }
+}
+
+@mixin ul-tiers {
+  ul.tiers-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: stretch;
+    flex-basis: auto;
+    width: fit-content;
+    margin-bottom: 30px;
+
+    li.tl__tier {
+      margin-right: 20px;
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      margin-bottom: 30px;
+      padding: 15px;
+      border: 1px solid rgb(229, 227, 221);
+      border-radius: 5px;
+
+      h3 { text-transform: uppercase; }
+
+      span { display: inline-flex; }
+
+      span.price {
+        //font-style: italic;
+        margin: 10px 0;
+      }
+
+      button.join {
+        width: 90%;
+        margin: 10px auto;
+        height: 30px;
+      }
+
+      span.join {
+        padding: 10px;
+        background: rgb(229, 227, 221);
+        border-radius: 5px;
+      }
+
+      ul.benefits-list {
+        li.bl__benefit {
+          margin-left: 20px;
+          list-style: circle;
+        }
+      }
+
+      span.description {
+        margin: 10px 0;
+        font-style: italic;
+      }
+    }
+  }
+}

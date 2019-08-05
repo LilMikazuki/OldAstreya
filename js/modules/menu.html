@@ -1,0 +1,57 @@
+<meta charset="UTF-8">
+<style>
+    #bar {
+        text-align: right;
+    }
+    .accordion {
+        background-color: #CFD8DC;
+        color: #fff;
+        cursor: pointer;
+        padding: 16px;
+        /*width: 50%;*/
+        border: none;
+        outline: none;
+        font-size: 18px;
+        transition: 0.5s;
+    }
+
+    .active, .accordion:hover {
+        background-color: #607D8B;
+    }
+
+    .panel {
+        padding: 0 18px;
+        color: #212121;
+        background-color: #fff;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+    }
+
+    img {
+        width: 24px; }
+
+    ul {
+        float: right;
+        margin: 0;
+    }
+    ul li {
+        float: left;
+        display: inline-block;
+        margin-right: 10px;
+        list-style: none;
+    }
+</style>
+<div id="bar">
+    <img src="menu.svg" sizes="24x24" alt="svg" class="accordion">
+    <div class="panel">
+        <ul>
+            <li><div class="nav-element" id="logo"><img src="content/icons/logo.svg" alt="Поиск"></div></li>
+            <li><a href="#" class="nav-link">Новое</a></li>
+            <li><a href="#" class="nav-link">Популярное</a></li>
+            <li><a href="#" class="nav-link">Вход</a></li>
+            <li><a href="#" class="nav-link">Регистрация</a></li>
+        </ul>
+    </div>
+</div>
+<script src="../menu.js"></script>

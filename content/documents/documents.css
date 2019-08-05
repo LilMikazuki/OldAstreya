@@ -1,0 +1,38 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+
+h1 {
+  margin-top: 50px;
+  text-align: center; }
+
+ul {
+  font-size: 18px;
+  padding-left: 10px;
+  list-style: none; }
+  ul.ul--marker {
+    list-style: decimal; }
+  ul li {
+    margin: 8px 0;
+    font-weight: normal; }
+    ul li.title {
+      margin-top: 30px;
+      font-weight: bold; }
+  ul li.li--column div.contain {
+    display: flex;
+    flex-direction: column; }
+    ul li.li--column div.contain img {
+      width: 550px;
+      margin: 20px;
+      border: 2px solid #272727; }
+
+span.accent {
+  font-weight: bold; }
+
+/*# sourceMappingURL=documents.css.map */
